@@ -1,85 +1,121 @@
-.box,
-ul {
-    padding: 0
-}
-
-.container,
 body {
-    margin: 0;
-    padding: 0
-}
-
-.container {
-    height: 100vh;
-    width: 100vw;
-    background-color: #303030;
-    display: table;
-    color: #FFF;
+    font-family: 'Poppins', sans-serif;
     text-align: center;
-    margin: 0 auto
+    padding: 50px 0;
+    margin: 0;
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #89f7fe, #66a6ff, #ff758c, #ff7eb3);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
 }
 
-.box,
-ul,
-ul li {
-    margin: 0
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    25% {
+        background-position: 50% 100%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    75% {
+        background-position: 50% 0%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
-.box {
-    width: 100%;
-    display: table-cell;
-    vertical-align: middle
-}
-
-ul {
-    list-style-type: none
-}
-
-ul li {
-    padding: 15px 12px;
-    display: block
-}
-
-a,
-a:focus,
-a:hover,
-a:visited {
-    text-decoration: none;
-    color: #FFF
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    border: 5px solid white;
 }
 
 h1 {
-    font-family: Lato, serif;
-    font-weight: 100;
-    font-size: 36px;
-    margin-bottom: 16px;
+    color: #ffffff;
+    font-size: 3rem;
+    margin-bottom: 10px;
 }
 
-ul li a {
-    font-family: Montserrat, serif;
-    font-size: 12px
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #f0f0f0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-h1,
-ul li a {
-    text-transform: uppercase;
-    letter-spacing: 6px
+.animate-text {
+    display: inline-block;
+    animation: typing 3s steps(10), blink 0.75s step-end infinite;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid white;
+    font-weight: bold;
+    font-size: 1.50rem;
+    color: #ffffff;
 }
 
-ul li:focus,
-ul li:hover {
-    background-color: #353535
-}
-
-@media (min-width:768px) {
-    h1 {
-        font-size: 75px;
-        letter-spacing: 12px
+@keyframes typing {
+    from {
+        width: 0;
     }
 
-    ul li {
-        display: inline-block;
-        padding: 24px 18px;
-        margin: 0
+    to {
+        width: 100%;
     }
+}
+
+@keyframes blink {
+
+    from,
+    to {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: white;
+    }
+}
+
+p,
+a {
+    color: #f0f0f0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+a:hover {
+    color: #ffc107;
+}
+
+.social-links {
+    padding: 0;
+}
+
+.social-links img {
+    width: 40px;
+    /* Increased icon size */
+    height: 40px;
+    /* Increased icon size */
+    margin: 0 10px;
+}
+
+.resume-btn {
+    margin-top: 30px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+}
+
+.resume-btn:hover {
+    background-color: #0056b3;
 }
