@@ -3,11 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://rohit-mewada.github.io",
+  "homepage": "https://github.com/rohit-mewada/rohit-mewada.github.io",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "preDeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
