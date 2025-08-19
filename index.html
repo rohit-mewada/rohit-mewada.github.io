@@ -1,123 +1,898 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rohit Mewada | Portfolio</title>
-  <style>
-    :root {
-      --bg-main: #f9fafb;
-      --bg-card: #ffffff;
-      --text-primary: #1f2937;
-      --text-secondary: #4b5563;
-      --accent: #2563eb;
-      --shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif;}
-    body {background: var(--bg-main); color: var(--text-primary); line-height: 1.6;}
-    header {text-align: center; padding: 3rem 1rem; background: linear-gradient(135deg, #2563eb, #3b82f6); color: white; box-shadow: var(--shadow);}
-    header h1 {font-size: 3rem; margin-bottom: .5rem;}
-    header p {font-size: 1.2rem; color: #e0f2fe;}
-    nav {margin-top: 1rem;}
-    nav a {margin: 0 .7rem; color: #fff; text-decoration: none; font-weight: bold; position: relative;}
-    nav a::after {content: ""; display: block; height: 2px; width: 0; background: white; transition: .3s; margin: auto;}
-    nav a:hover::after {width: 100%;}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rohit Mewada — Software Engineer</title>
+    <meta name="description"
+        content="Portfolio of Rohit Mewada: Java, Spring Boot, Microservices, AWS, Generative AI." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ====== Theme ====== */
+        :root {
+            --bg: #f8fafc;
+            /* slate-50 */
+            --panel: #ffffff;
+            /* white */
+            --ink: #0f172a;
+            /* slate-900 */
+            --muted: #475569;
+            /* slate-600 */
+            --brand: #2563eb;
+            /* blue-600 */
+            --brand-2: #22d3ee;
+            /* cyan-400 */
+            --ring: rgba(37, 99, 235, .2);
+            --shadow: 0 10px 30px rgba(2, 6, 23, .08);
+            --radius: 18px;
+            --max: 1150px;
+        }
 
-    section {padding: 4rem 2rem; max-width: 1100px; margin: auto;}
-    section h2 {font-size: 2.2rem; margin-bottom: 2rem; color: var(--accent); text-align: center; position: relative;}
-    section h2::after {content: ""; display: block; width: 60px; height: 3px; background: var(--accent); margin: 0.5rem auto 0; border-radius: 2px;}
+        * {
+            box-sizing: border-box
+        }
 
-    ul {list-style: none; padding: 0;}
-    .skills li, .experience li, .achievements li {background: var(--bg-card); margin: .8rem 0; padding: 1rem 1.5rem; border-radius: 12px; box-shadow: var(--shadow); transition: transform .3s;}
-    .skills li:hover, .experience li:hover, .achievements li:hover {transform: translateY(-5px);} 
+        html {
+            scroll-behavior: smooth
+        }
 
-    .projects {display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;}
-    .project {background: var(--bg-card); padding: 2rem; border-radius: 12px; text-align: center; box-shadow: var(--shadow); transition: transform .3s;}
-    .project:hover {transform: scale(1.05);} 
-    .project h3 {color: var(--accent); margin-bottom: .5rem;}
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            color: var(--ink);
+            background: var(--bg);
+        }
 
-    .contact {text-align: center;}
-    .contact a {display: inline-block; margin: .5rem; color: var(--accent); text-decoration: none; font-weight: bold; border: 2px solid var(--accent); padding: .5rem 1rem; border-radius: 6px; transition: all .3s;}
-    .contact a:hover {background: var(--accent); color: white;}
+        a {
+            color: inherit;
+            text-decoration: none
+        }
 
-    footer {text-align: center; padding: 2rem; background: #e5e7eb; color: var(--text-secondary); margin-top: 2rem;}
-  </style>
+        img {
+            max-width: 100%;
+            display: block
+        }
+
+        .container {
+            width: min(var(--max), 92%);
+            margin-inline: auto
+        }
+
+        /* ====== Fancy Background ====== */
+        .bgFX {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(60px);
+            opacity: .25;
+            animation: float 16s ease-in-out infinite
+        }
+
+        .b1 {
+            background: radial-gradient(600px 400px at 10% 10%, var(--brand), transparent 50%);
+            width: 100%;
+            height: 100%
+        }
+
+        .b2 {
+            background: radial-gradient(600px 400px at 90% 0%, var(--brand-2), transparent 50%);
+            width: 100%;
+            height: 100%;
+            animation-delay: -6s
+        }
+
+        .b3 {
+            background: radial-gradient(600px 400px at 50% 100%, #60a5fa, transparent 55%);
+            width: 100%;
+            height: 100%;
+            animation-delay: -12s
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-14px)
+            }
+        }
+
+        /* ====== Header / Nav ====== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: saturate(140%) blur(10px);
+            background: rgba(255, 255, 255, .75);
+            border-bottom: 1px solid rgba(2, 6, 23, .06)
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+            font-weight: 800;
+            letter-spacing: .2px
+        }
+
+        .logo .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 999px;
+            background: conic-gradient(from 180deg, var(--brand), var(--brand-2));
+            box-shadow: 0 0 24px var(--brand-2)
+        }
+
+        .nav a {
+            opacity: .85
+        }
+
+        .nav a:hover {
+            opacity: 1
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: .6rem
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .65rem .95rem;
+            border: 1px solid rgba(2, 6, 23, .08);
+            border-radius: 12px;
+            background: linear-gradient(180deg, #fff, #f8fafc);
+            box-shadow: var(--shadow);
+            transition: transform .2s ease, box-shadow .2s ease
+        }
+
+        .btn:hover {
+            transform: translateY(-2px)
+        }
+
+        .ghost {
+            background: transparent;
+            box-shadow: none
+        }
+
+        /* ====== Hero ====== */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 2rem;
+            align-items: center;
+            padding: 3.5rem 0 2rem
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .85rem;
+            color: var(--muted);
+            background: rgba(37, 99, 235, .08);
+            border: 1px solid rgba(37, 99, 235, .2);
+            padding: .35rem .7rem;
+            border-radius: 999px
+        }
+
+        h1 {
+            font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+            line-height: 1.05;
+            margin: .6rem 0;
+            font-weight: 800
+        }
+
+        .grad {
+            background: linear-gradient(90deg, var(--brand), var(--brand-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent
+        }
+
+        .lead {
+            font-size: 1.12rem;
+            color: var(--muted)
+        }
+
+        .ctas {
+            display: flex;
+            gap: .7rem;
+            margin-top: 1rem
+        }
+
+        .code-card {
+            position: relative;
+            border-radius: var(--radius);
+            background: #fbfdff;
+            border: 1px solid rgba(2, 6, 23, .06);
+            padding: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow)
+        }
+
+        .status-bar {
+            display: flex;
+            gap: .4rem;
+            padding: .25rem
+        }
+
+        .dotr,
+        .doty,
+        .dotg {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px
+        }
+
+        .dotr {
+            background: #ef4444
+        }
+
+        .doty {
+            background: #f59e0b
+        }
+
+        .dotg {
+            background: #10b981
+        }
+
+        pre {
+            margin: 0;
+            padding: 1rem;
+            background: linear-gradient(180deg, #ffffff, #f1f5f9);
+            border: 1px solid rgba(2, 6, 23, .06);
+            border-radius: 12px;
+            color: #0f172a;
+            font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+            font-size: .92rem;
+            max-height: 340px;
+            overflow: auto
+        }
+
+        .sparkle {
+            position: absolute;
+            inset: auto;
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 30%, #fff, rgba(255, 255, 255, .15) 60%);
+            animation: float 6s ease-in-out infinite;
+            opacity: .8
+        }
+
+        .s1 {
+            top: 10%;
+            right: 12%;
+            animation-delay: -1s
+        }
+
+        .s2 {
+            top: 40%;
+            right: 6%;
+            width: 6px;
+            height: 6px;
+            animation-delay: -2.5s
+        }
+
+        .s3 {
+            bottom: 14%;
+            right: 18%;
+            width: 10px;
+            height: 10px;
+            animation-delay: -4s
+        }
+
+        /* ====== Sections ====== */
+        main section {
+            padding: 3.2rem 0
+        }
+
+        .section-title {
+            font-size: clamp(1.4rem, 2.6vw, 2rem);
+            margin: 0 0 1.1rem;
+            text-align: center
+        }
+
+        .section-title .accent {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--brand), var(--brand-2));
+            height: 3px;
+            width: 68px;
+            border-radius: 999px;
+            margin: .6rem auto 0
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid rgba(2, 6, 23, .06);
+            border-radius: 16px;
+            padding: 1.2rem;
+            box-shadow: var(--shadow)
+        }
+
+        /* ====== Skills ====== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem
+        }
+
+        .skill-card {
+            padding: 1rem 1.1rem
+        }
+
+        .skill-title {
+            font-weight: 700;
+            margin-bottom: .4rem
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .4rem
+        }
+
+        .chip {
+            font-size: .87rem;
+            padding: .35rem .6rem;
+            border-radius: 999px;
+            border: 1px solid rgba(2, 6, 23, .08);
+            background: linear-gradient(180deg, #fff, #f8fafc)
+        }
+
+        /* ====== Projects ====== */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem
+        }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #ffffff;
+            border: 1px solid rgba(2, 6, 23, .06);
+            transition: transform .2s, box-shadow .2s
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(2, 6, 23, .12)
+        }
+
+        .card img {
+            aspect-ratio: 16 / 10;
+            object-fit: cover
+        }
+
+        .card-body {
+            padding: 1rem
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            font-size: .78rem;
+            padding: .25rem .55rem;
+            border-radius: 999px;
+            border: 1px solid rgba(2, 6, 23, .12);
+            background: #f8fafc
+        }
+
+        /* ====== Timeline ====== */
+        .timeline {
+            position: relative;
+            padding-left: 1.4rem
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: .35rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, rgba(2, 6, 23, .1), rgba(2, 6, 23, .03))
+        }
+
+        .t-item {
+            position: relative;
+            margin: 0 0 1.1rem
+        }
+
+        .t-item::before {
+            content: "";
+            position: absolute;
+            left: -.32rem;
+            top: .2rem;
+            width: 10px;
+            height: 10px;
+            background: conic-gradient(from 180deg, var(--brand), var(--brand-2));
+            border-radius: 999px;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, .12)
+        }
+
+        .t-item h3 {
+            margin: .1rem 0 .2rem
+        }
+
+        /* ====== Contact ====== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem
+        }
+
+        .contact form {
+            display: grid;
+            gap: .8rem
+        }
+
+        input,
+        textarea {
+            background: #fff;
+            color: var(--ink);
+            border: 1px solid rgba(2, 6, 23, .12);
+            border-radius: 12px;
+            padding: .85rem .95rem;
+            outline: none
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--brand);
+            box-shadow: 0 0 0 6px var(--ring)
+        }
+
+        /* ====== Footer ====== */
+        footer {
+            padding: 2rem 0;
+            color: var(--muted);
+            border-top: 1px solid rgba(2, 6, 23, .08);
+            background: rgba(255, 255, 255, .6);
+            backdrop-filter: saturate(140%) blur(6px)
+        }
+
+        /* ====== Reveal Animations ====== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            filter: blur(6px);
+            transition: opacity .6s ease, transform .6s ease, filter .6s ease
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: none;
+            filter: none
+        }
+
+        /* ====== Responsive ====== */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 1.4rem;
+                padding: 2.6rem 0 1.2rem
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr
+            }
+
+            .nav-links {
+                display: none
+            }
+
+            .menu-btn {
+                display: inline-flex
+            }
+        }
+
+        @media (min-width: 901px) {
+            .menu-btn {
+                display: none
+            }
+        }
+
+        /* Mobile Sheet */
+        .mobile {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, .35);
+            backdrop-filter: blur(6px);
+            display: none
+        }
+
+        .mobile.open {
+            display: block
+        }
+
+        .mobile .sheet {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: min(78%, 320px);
+            background: #ffffff;
+            border-left: 1px solid rgba(2, 6, 23, .06);
+            padding: 1rem
+        }
+
+        .mobile a {
+            display: block;
+            padding: .9rem 0;
+            border-bottom: 1px dashed rgba(2, 6, 23, .12)
+        }
+    </style>
 </head>
+
 <body>
-  <header>
-    <h1>Rohit Mewada</h1>
-    <p>Software Engineer | Java | Spring Boot | AWS | Generative AI</p>
-    <nav>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#achievements">Achievements</a>
-      <a href="#contact">Contact</a>
-      <a href="https://docs.google.com/document/d/1vzZmv2sAJigu-99Bw0IKl_LiLwfs9ofO6dM2-fz8irI/export?format=pdf" target="_blank">Download CV</a>
-    </nav>
-  </header>
-
-  <section id="skills" class="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li><strong>Languages:</strong> Java, Python, C, SQL</li>
-      <li><strong>Frameworks:</strong> Spring Boot, JPA, Kafka, Rabbit MQ, JUnit, Angular</li>
-      <li><strong>Architecture:</strong> Microservices, Monolithic, LLD, HLD, OOP, Design Patterns</li>
-      <li><strong>Practices:</strong> REST APIs, API Security, DS & Algorithms, DB Design</li>
-      <li><strong>Databases:</strong> MySQL, PostgreSQL, NoSQL</li>
-      <li><strong>DevOps:</strong> Git, Jenkins, Docker, SonarQube, OpenShift, CI/CD</li>
-      <li><strong>Cloud:</strong> AWS (EC2, S3, Lambda, RDS, DynamoDB, CloudFront, CloudWatch)</li>
-      <li><strong>AI:</strong> Generative AI, LLMs, Prompt Engineering, GitHub Copilot</li>
-    </ul>
-  </section>
-
-  <section id="experience" class="experience">
-    <h2>Experience</h2>
-    <ul>
-      <li><strong>Infosys (Feb 2022 - Present)</strong> Specialist Programmer<br>Developed 10+ microservices, optimized onboarding workflows (40% faster), built dashboards, integrated credit card booking, built Kafka-based delay queue, migrated monolithic to microservices, increased test coverage to 80%+.</li>
-      <li><strong>ZeOmega (Nov 2021 - Jan 2022)</strong> Software Developer<br>Migrated services GitLab→Bitbucket, configured CI/CD pipelines, upgraded microservices to modern Java & Spring Boot.</li>
-      <li><strong>Nagarro (May 2021 - Oct 2021)</strong> Software Developer Trainee<br>Delivered full-stack projects, improved JUnit test coverage from 75% to 100%.</li>
-    </ul>
-  </section>
-
-  <section id="projects" class="projects">
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>InterviewCheatsheet</h3>
-      <p>A one-stop hub for interview prep with real-world examples & code snippets.</p>
+    <!-- Background blobs -->
+    <div class="bgFX" aria-hidden="true">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+        <div class="blob b3"></div>
     </div>
-    <div class="project">
-      <h3>AI Trading Bot</h3>
-      <p>Built swing/intraday trading bots using yFinance, Telegram, and AI filters.</p>
+
+    <!-- Header / Nav -->
+    <header>
+        <div class="container nav">
+            <a class="logo" href="#"> <span class="dot"></span> <span>Rohit</span></a>
+            <nav class="nav-links" style="display:flex; gap:1rem; align-items:center">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <!-- <a href="#projects">Projects</a> -->
+                <a href="#experience">Experience</a>
+                <a href="#achievements">Achievements</a>
+                <a href="#contact">Contact</a>
+                <a class="btn"
+                    href="https://docs.google.com/document/d/1vzZmv2sAJigu-99Bw0IKl_LiLwfs9ofO6dM2-fz8irI/export?format=pdf"
+                    target="_blank" rel="noreferrer">Download CV</a>
+            </nav>
+            <button class="btn menu-btn" id="openMenu" aria-label="Open menu">☰</button>
+        </div>
+    </header>
+
+    <!-- Mobile menu -->
+    <div class="mobile" id="mobileMenu" aria-hidden="true">
+        <div class="sheet">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:.5rem">
+                <strong>Menu</strong>
+                <button class="btn ghost" id="closeMenu">✕</button>
+            </div>
+            <a href="#about" onclick="closeMenu()">About</a>
+            <a href="#skills" onclick="closeMenu()">Skills</a>
+            <a href="#projects" onclick="closeMenu()">Projects</a>
+            <a href="#experience" onclick="closeMenu()">Experience</a>
+            <a href="#achievements" onclick="closeMenu()">Achievements</a>
+            <a href="#contact" onclick="closeMenu()">Contact</a>
+            <a href="https://docs.google.com/document/d/1vzZmv2sAJigu-99Bw0IKl_LiLwfs9ofO6dM2-fz8irI/export?format=pdf"
+                target="_blank" onclick="closeMenu()">Download CV</a>
+        </div>
     </div>
-    <div class="project">
-      <h3>Gym App</h3>
-      <p>Expo-based app with trainer assignments, diet plans, and root profiles.</p>
-    </div>
-  </section>
 
-  <section id="achievements" class="achievements">
-    <h2>Achievements</h2>
-    <ul>
-      <li>AWS Certified Developer – Associate</li>
-      <li>750+ LeetCode Problems Solved</li>
-      <li>Infosys Awards: Rising Star, Project Pioneer, You are a Saviour, Resilient Champ, Helping Hands, Insta Award</li>
-    </ul>
-  </section>
+    <main class="container">
+        <!-- Hero -->
+        <section class="hero">
+            <div>
+                <span class="eyebrow reveal">Available for freelance • Based in India</span>
+                <h2 class="reveal" style="transition-delay:.05s">Hi, I'm <span class="grad">Rohit Mewada</span> — a
+                    software engineer crafting scalable microservices & delightful web experiences.</h2>
+                <p class="lead reveal" style="transition-delay:.1s">Java • Spring Boot • Kafka • AWS • Microservices •
+                    Generative AI. I turn complex requirements into reliable, performant systems.</p>
+                <div class="ctas reveal" style="transition-delay:.15s">
+                    <!-- <a class="btn" href="#projects">See Projects</a> -->
+                    <a class="btn ghost" href="mailto:rohitmewada98@gmail.com">Email Me</a>
+                </div>
+                <div class="reveal"
+                    style="display:flex; gap:.6rem; margin-top:1rem; flex-wrap:wrap; transition-delay:.2s">
+                    <a class="pill" href="https://github.com/rohit-mewada" target="_blank" rel="noreferrer">GitHub →</a>
+                    <a class="pill" href="https://linkedin.com/in/rohitmewada98" target="_blank"
+                        rel="noreferrer">LinkedIn →</a>
+                    <a class="pill" href="https://leetcode.com/Rohit_mewada/" target="_blank" rel="noreferrer">LeetCode
+                        →</a>
+                    <a class="pill" href="https://www.hackerrank.com/rohitmewada98" target="_blank"
+                        rel="noreferrer">HackerRank →</a>
+                    <a class="pill" href="https://www.hackerearth.com/@rohitmewada" target="_blank"
+                        rel="noreferrer">HackerEarth →</a>
+                    <a class="pill" href="https://rohit-mewada.github.io" target="_blank" rel="noreferrer">Portfolio
+                        →</a>
+                </div>
+            </div>
 
-  <section id="contact" class="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:rohitmewada98@gmail.com">rohitmewada98@gmail.com</a></p>
-    <p>Mobile: +91-8819040320</p>
-    <a href="https://linkedin.com/in/rohitmewada98" target="_blank">LinkedIn</a>
-    <a href="https://github.com/rohit-mewada" target="_blank">GitHub</a>
-    <a href="https://leetcode.com/Rohit_mewada" target="_blank">LeetCode</a>
-    <a href="https://www.hackerearth.com/@rohitmewada" target="_blank">HackerEarth</a>
-    <a href="https://www.hackerrank.com/rohitmewada98" target="_blank">HackerRank</a>
-  </section>
+            <div class="code-card reveal" style="transition-delay:.15s">
+                <div class="status-bar"><span class="dotr"></span><span class="doty"></span><span class="dotg"></span>
+                </div>
+                <pre>
+                    <code>
+package com.rohitmewada.portfolio.controller;
 
-  <footer>
-    <p>© 2025 Rohit Mewada | Portfolio</p>
-  </footer>
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ProfileController {
+
+@GetMapping("/hi")
+public String sayHi() {
+    String name = "Rohit Mewada";
+    String role = "Software Engineer";
+    String[] skills = {
+        "Java", "Spring Boot", "Kafka", "RabbitMQ", "JPA",
+        "AWS", "Microservices", "CI/CD", "Docker", "OpenShift", "JUnit"
+        };
+    String[] interests = {"System Design", "Generative AI"};
+
+    return "👋 Hello, I'm " + name + " (" + role + ").\n"
+        + "⚡ Skills: " + String.join(", ", skills) + "\n"
+        + "🚀 Interests: " + String.join(", ", interests) + "\n\n"
+        + "💡 Hire Rohit → Get full-stack solutions, clean APIs, and fewer production headaches 😉";
+    }
+}
+    </code>
+</pre>
+                <span class="sparkle s1"></span>
+                <span class="sparkle s2"></span>
+                <span class="sparkle s3"></span>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about">
+            <h2 class="section-title reveal">About<div class="accent"></div>
+            </h2>
+            <div class="panel reveal" style="transition-delay:.05s">
+                <p>I'm a product‑oriented software engineer focused on backend platforms and end‑to‑end delivery. I love
+                    building resilient microservices, clean REST APIs, and collaborating across teams to ship features
+                    that matter. I care about performance, observability, testing, and developer experience.</p>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <h2 class="section-title reveal">Skills<div class="accent"></div>
+            </h2>
+            <div class="skills-grid">
+                <div class="panel skill-card reveal">
+                    <div class="skill-title">Languages</div>
+                    <div class="chips"><span class="chip">Java</span><span class="chip">Python</span><span
+                            class="chip">C</span><span class="chip">SQL</span></div>
+                </div>
+                <div class="panel skill-card reveal" style="transition-delay:.02s">
+                    <div class="skill-title">Frameworks & Libraries</div>
+                    <div class="chips"><span class="chip">Spring Boot</span><span class="chip">JPA</span><span
+                            class="chip">Kafka</span><span class="chip">RabbitMQ</span><span
+                            class="chip">JUnit</span><span class="chip">Angular</span></div>
+                </div>
+                <div class="panel skill-card reveal" style="transition-delay:.04s">
+                    <div class="skill-title">Architecture & Design</div>
+                    <div class="chips"><span class="chip">Microservices</span><span class="chip">Monolith</span><span
+                            class="chip">Design Patterns</span><span class="chip">LLD</span><span
+                            class="chip">HLD</span><span class="chip">OOP</span></div>
+                </div>
+                <div class="panel skill-card reveal" style="transition-delay:.06s">
+                    <div class="skill-title">Practices</div>
+                    <div class="chips"><span class="chip">RESTful API</span><span class="chip">API Security</span><span
+                            class="chip">DSA</span><span class="chip">DB Design</span><span
+                            class="chip">Optimization</span></div>
+                </div>
+                <div class="panel skill-card reveal" style="transition-delay:.08s">
+                    <div class="skill-title">Databases</div>
+                    <div class="chips"><span class="chip">MySQL</span><span class="chip">PostgreSQL</span><span
+                            class="chip">NoSQL Concepts</span></div>
+                </div>
+                <div class="panel skill-card reveal" style="transition-delay:.1s">
+                    <div class="skill-title">DevOps</div>
+                    <div class="chips"><span class="chip">Git</span><span class="chip">Jenkins</span><span
+                            class="chip">Docker</span><span class="chip">SonarQube</span><span
+                            class="chip">OpenShift</span><span class="chip">CI/CD</span></div>
+                </div>
+                <div class="panel skill-card reveal" style="transition-delay:.12s">
+                    <div class="skill-title">Cloud</div>
+                    <div class="chips"><span class="chip">AWS</span><span class="chip">EC2</span><span
+                            class="chip">S3</span><span class="chip">Lambda</span><span class="chip">RDS</span><span
+                            class="chip">DynamoDB</span><span class="chip">CloudFront</span><span
+                            class="chip">CloudWatch</span></div>
+                </div>
+                <div class="panel skill-card reveal" style="transition-delay:.14s">
+                    <div class="skill-title">AI & Tools</div>
+                    <div class="chips"><span class="chip">Generative AI</span><span class="chip">LLMs</span><span
+                            class="chip">Prompt Eng</span><span class="chip">GitHub Copilot</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <!-- <section id="projects">
+      <h2 class="section-title reveal">Projects<div class="accent"></div></h2>
+      <div class="projects">
+        <article class="card reveal">
+          <img alt="InterviewCheatsheet project" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop"/>
+          <div class="card-body">
+            <h3>InterviewCheatsheet</h3>
+            <p class="muted">A one‑stop hub for interview prep with real examples & code snippets. Search, topic cards, and deploy on Vercel.</p>
+            <div style="display:flex; gap:.4rem; margin-top:.5rem; flex-wrap:wrap">
+              <a class="pill" href="https://interviewcheatsheet.in" target="_blank" rel="noreferrer">Live</a>
+              <a class="pill" href="https://github.com/rohit-mewada" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </div>
+        </article>
+        <article class="card reveal" style="transition-delay:.04s">
+          <img alt="Trading bot" src="https://images.unsplash.com/photo-1642790106117-31b5564b3c9c?q=80&w=1200&auto=format&fit=crop"/>
+          <div class="card-body">
+            <h3>AI Trading Bots</h3>
+            <p class="muted">Swing & Intraday strategies with yFinance, Telegram alerts, EMA pullbacks, and AI‑assisted filters.</p>
+            <div style="display:flex; gap:.4rem; margin-top:.5rem; flex-wrap:wrap">
+              <span class="pill">Python</span>
+              <span class="pill">Telegram</span>
+              <a class="pill" href="https://github.com/rohit-mewada" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </div>
+        </article>
+        <article class="card reveal" style="transition-delay:.08s">
+          <img alt="Gym App" src="https://images.unsplash.com/photo-1572451474270-0f4b4f0cbf2c?q=80&w=1200&auto=format&fit=crop"/>
+          <div class="card-body">
+            <h3>Gym App (Expo)</h3>
+            <p class="muted">Trainers assign diet plans; admins assign trainers; root profile with multi‑gym oversight.</p>
+            <div style="display:flex; gap:.4rem; margin-top:.5rem; flex-wrap:wrap">
+              <span class="pill">React Native</span>
+              <a class="pill" href="https://github.com/rohit-mewada" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section> -->
+
+        <!-- Experience -->
+        <section id="experience">
+            <h2 class="section-title reveal">Experience<div class="accent"></div>
+            </h2>
+            <div class="panel">
+                <div class="timeline">
+                    <div class="t-item reveal">
+                        <h3>Infosys • Specialist Programmer</h3>
+                        <p class="muted">Feb 2022 — Present</p>
+                        <p>Built 10+ REST microservices for account opening journeys (onboarding time −40%), task
+                            dashboards with advanced filters & export, credit card booking with overdraft support.
+                            Authored a binder‑agnostic Spring Cloud Stream library; created Kafka‑based delay queue;
+                            wiretap monitoring for raw request/response; decomposed monolith → microservices (response
+                            −30%, deployment −50%); raised tests 10% → 80%+ and resolved critical vulns; partnered with
+                            UI for end‑to‑end delivery.</p>
+                    </div>
+                    <div class="t-item reveal" style="transition-delay:.04s">
+                        <h3>ZeOmega • Software Developer</h3>
+                        <p class="muted">Nov 2021 — Jan 2022</p>
+                        <p>Migrated services GitLab → Bitbucket and set up CI/CD; upgraded microservices to latest Java
+                            & Spring Boot.</p>
+                    </div>
+                    <div class="t-item reveal" style="transition-delay:.08s">
+                        <h3>Nagarro • Software Developer Trainee</h3>
+                        <p class="muted">May 2021 — Oct 2021</p>
+                        <p>Completed full‑stack training and shipped projects; improved JUnit coverage from 75% → 100%.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements -->
+        <section id="achievements">
+            <h2 class="section-title reveal">Achievements<div class="accent"></div>
+            </h2>
+            <div class="skills-grid">
+                <div class="panel skill-card reveal">
+                    <div class="skill-title">Certification</div>
+                    <div class="chips"><span class="chip">AWS Developer – Associate</span></div>
+                </div>
+                <div class="panel skill-card reveal" style="transition-delay:.02s">
+                    <div class="skill-title">Coding</div>
+                    <div class="chips"><span class="chip">750+ LeetCode</span></div>
+                </div>
+                <div class="panel skill-card reveal" style="transition-delay:.04s">
+                    <div class="skill-title">Awards @ Infosys</div>
+                    <div class="chips"><span class="chip">Project Pioneer</span><span class="chip">Rising
+                            Star</span><span class="chip">You are a Savior</span><span class="chip">Resilient
+                            Champ</span><span class="chip">Helping Hands</span><span class="chip">Insta Award</span>
+                    </div>
+                </div>
+                <div class="panel skill-card reveal" style="transition-delay:.06s">
+                    <div class="skill-title">Education</div>
+                    <div class="chips"><span class="chip">B.Tech CSE — OIST (2017–2021)</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="contact">
+            <h2 class="section-title reveal">Contact<div class="accent"></div>
+            </h2>
+            <div class="contact-grid">
+                <div class="panel reveal">
+                    <p>Have a role or a project in mind? Reach out — I usually reply within a day.</p>
+                    <p class="muted">Email <a href="mailto:rohitmewada98@gmail.com">rohitmewada98@gmail.com</a> or call
+                        <a href="tel:+918819040320">+91‑8819040320</a>
+                    </p>
+                    <div style="display:flex; gap:.6rem; margin-top:.6rem; flex-wrap:wrap">
+                        <a class="btn" href="mailto:rohitmewada98@gmail.com?subject=Project%20Inquiry">Email</a>
+                        <a class="btn ghost" href="https://linkedin.com/in/rohitmewada98" target="_blank"
+                            rel="noreferrer">LinkedIn</a>
+                        <a class="btn ghost" href="https://github.com/rohit-mewada" target="_blank"
+                            rel="noreferrer">GitHub</a>
+                    </div>
+                </div>
+                <div class="panel reveal" style="transition-delay:.05s">
+                    <form action="mailto:rohitmewada98@gmail.com" method="post" enctype="text/plain">
+                        <input type="text" name="name" placeholder="Your Name" required />
+                        <input type="email" name="email" placeholder="Your Email" required />
+                        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                        <button class="btn" type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container"
+            style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap">
+            <span>© <span id="year"></span> Rohit Mewada</span>
+            <div style="display:flex; gap:.7rem">
+                <a class="pill" href="#">Top ↑</a>
+                <a class="pill" href="https://rohit-mewada.github.io" target="_blank" rel="noreferrer">Portfolio</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Year
+        document.getElementById('year').textContent = new Date().getFullYear()
+
+        // Mobile menu
+        const mobileMenu = document.getElementById('mobileMenu')
+        document.getElementById('openMenu').addEventListener('click', () => mobileMenu.classList.add('open'))
+        document.getElementById('closeMenu').addEventListener('click', () => mobileMenu.classList.remove('open'))
+        window.closeMenu = () => mobileMenu.classList.remove('open')
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); } })
+        }, { threshold: 0.12 })
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+
+        // Respect prefers-reduced-motion
+        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+        if (mediaQuery.matches) { document.querySelectorAll('*').forEach(el => el.style.transition = 'none') }
+    </script>
 </body>
+
 </html>
