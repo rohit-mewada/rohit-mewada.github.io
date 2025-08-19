@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Software Engineer Portfolio – Your Name</title>
+  <meta name="description" content="Portfolio website of a software engineer: projects, skills, experience, and contact." />
+  <meta property="og:title" content="Software Engineer Portfolio – Your Name" />
+  <meta property="og:description" content="Projects, skills, experience and contact." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230ea5e9'/%3E%3Ctext x='50' y='62' font-size='50' text-anchor='middle' fill='white'%3E{ }%3C/text%3E%3C/svg%3E" />
+  <style>
+    /* ----------- CSS Variables & Base ----------- */
+    :root{
+      --bg: #0b1020;
+      --panel: #11162a;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --brand: #0ea5e9;
+      --accent: #22d3ee;
+      --ring: rgba(34,211,238,0.35);
+      --code: #0d1326;
+      --shadow: 0 10px 30px rgba(2,8,23,0.6);
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f8fafc;--panel:#ffffff;--text:#0f172a;--muted:#475569;--brand:#0ea5e9;--accent:#0ea5e9;--ring:rgba(14,165,233,0.25);--code:#0b1020;--shadow:0 10px 30px rgba(2,6,23,0.08);
+      }
+    }
+    [data-theme="light"]:root{ --bg:#f8fafc;--panel:#ffffff;--text:#0f172a;--muted:#475569;--brand:#0ea5e9;--accent:#0ea5e9;--ring:rgba(14,165,233,0.25);--code:#0b1020;--shadow:0 10px 30px rgba(2,6,23,0.08);}
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text); background: radial-gradient(1200px 800px at 80% -10%, rgba(14,165,233,0.15), transparent 60%),
+                         radial-gradient(1000px 700px at -10% 10%, rgba(34,211,238,0.12), transparent 50%),
+                         var(--bg);
+    }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{width:min(1100px, 92%); margin-inline:auto}
+
+    /* ----------- Top Nav ----------- */
+    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(120%) blur(8px); background:linear-gradient(180deg, rgba(2,6,23,0.65), rgba(2,6,23,0)); border-bottom:1px solid rgba(148,163,184,0.12)}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:.9rem 0}
+    .logo{display:flex; align-items:center; gap:.6rem; font-weight:800; letter-spacing:.2px}
+    .logo .dot{width:10px;height:10px;border-radius:999px;background:conic-gradient(from 180deg at 50% 50%, var(--brand), var(--accent)); box-shadow:0 0 30px var(--accent)}
+    .nav-links{display:flex; gap:1.2rem; align-items:center}
+    .nav-links a{opacity:.85}
+    .nav-links a:hover{opacity:1}
+    .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.6rem .9rem; border-radius:12px; border:1px solid rgba(148,163,184,.2); background:linear-gradient(180deg, rgba(148,163,184,.08), rgba(148,163,184,.03)); box-shadow:var(--shadow); transition:transform .2s ease, box-shadow .2s ease}
+    .btn:hover{transform:translateY(-2px)}
+    .ghost{background:transparent; box-shadow:none}
+
+    /* Theme toggle */
+    .toggle{width:42px;height:26px;border-radius:999px;position:relative; border:1px solid rgba(148,163,184,.3); cursor:pointer}
+    .toggle::after{content:""; position:absolute; inset:2px; width:20px; height:20px; border-radius:999px; background:linear-gradient(180deg, var(--brand), var(--accent)); box-shadow:0 6px 14px var(--ring); transform:translateX(0); transition:transform .25s ease}
+    :root[data-theme="light"] .toggle::after{ transform:translateX(16px) }
+
+    /* ----------- Hero ----------- */
+    .hero{display:grid; grid-template-columns:1.2fr .8fr; gap:2rem; align-items:center; padding:5rem 0 3rem}
+    .tag{display:inline-flex; align-items:center; gap:.5rem; font-size:.85rem; color:var(--muted); background:rgba(14,165,233,0.08); border:1px solid rgba(14,165,233,0.2); padding:.4rem .7rem; border-radius:999px}
+    h1{font-size:clamp(2rem, 4.5vw, 3.4rem); line-height:1.05; margin:.7rem 0}
+    .lead{font-size:1.1rem; color:var(--muted)}
+
+    .code-card{position:relative; border-radius:18px; background:linear-gradient(180deg, rgba(148,163,184,.08), rgba(148,163,184,.03)); border:1px solid rgba(148,163,184,.12); padding:1rem; overflow:hidden; box-shadow:var(--shadow)}
+    .status-bar{display:flex; gap:.4rem; padding:.25rem}
+    .dotr{width:10px;height:10px;border-radius:999px;background:#ef4444}
+    .doty{width:10px;height:10px;border-radius:999px;background:#f59e0b}
+    .dotg{width:10px;height:10px;border-radius:999px;background:#10b981}
+    pre{margin:0; padding:1rem; background:linear-gradient(180deg, rgba(2,6,23,.7), rgba(2,6,23,.3)); border:1px solid rgba(148,163,184,.12); border-radius:12px; color:#e2e8f0; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:.9rem; max-height:340px; overflow:auto}
+
+    /* Floating sparkles */
+    .sparkle{position:absolute; inset:auto; width:8px; height:8px; border-radius:999px; background:radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.1) 60%); animation:float 6s ease-in-out infinite; opacity:.7}
+    .s1{top:10%; right:12%; animation-delay:-1s}
+    .s2{top:40%; right:6%; width:6px; height:6px; animation-delay:-2.5s}
+    .s3{bottom:14%; right:18%; width:10px; height:10px; animation-delay:-4s}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+    /* ----------- Sections ----------- */
+    section{padding:4rem 0}
+    .section-title{font-size:clamp(1.4rem, 2.8vw, 2rem); margin:0 0 1rem}
+    .muted{color:var(--muted)}
+    .panel{background:var(--panel); border:1px solid rgba(148,163,184,.12); border-radius:16px; padding:1.2rem; box-shadow:var(--shadow)}
+
+    /* Skills */
+    .skills{display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:1rem}
+    .chip{display:flex; align-items:center; justify-content:space-between; gap:.6rem; padding:.7rem .9rem; border-radius:12px; border:1px solid rgba(148,163,184,.16); background:linear-gradient(180deg, rgba(148,163,184,.06), rgba(148,163,184,.02)); transition:transform .2s}
+    .chip:hover{transform:translateY(-2px)}
+
+    /* Projects */
+    .projects{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.3rem}
+    .card{position:relative; overflow:hidden; border-radius:16px; background:linear-gradient(180deg, rgba(148,163,184,.06), rgba(148,163,184,.02)); border:1px solid rgba(148,163,184,.16); transition:transform .2s, box-shadow .2s}
+    .card:hover{transform:translateY(-4px); box-shadow:0 20px 50px rgba(2,6,23,.28)}
+    .card img{aspect-ratio: 16 / 10; object-fit: cover}
+    .card-body{padding:1rem}
+    .pill{display:inline-flex; align-items:center; gap:.4rem; font-size:.75rem; padding:.2rem .55rem; border-radius:999px; border:1px solid rgba(148,163,184,.3)}
+
+    /* Timeline */
+    .timeline{position:relative; padding-left:1.5rem}
+    .timeline::before{content:""; position:absolute; left:.4rem; top:0; bottom:0; width:2px; background:linear-gradient(180deg, rgba(148,163,184,.2), rgba(148,163,184,.05))}
+    .t-item{position:relative; margin:0 0 1.2rem}
+    .t-item::before{content:""; position:absolute; left:-.27rem; top:.2rem; width:10px; height:10px; background:conic-gradient(from 180deg, var(--brand), var(--accent)); border-radius:999px; box-shadow:0 0 0 4px rgba(14,165,233,.12)}
+
+    /* Contact */
+    .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:1rem}
+    .contact form{display:grid; gap:.8rem}
+    input, textarea{background:transparent; color:var(--text); border:1px solid rgba(148,163,184,.25); border-radius:12px; padding:.8rem .9rem; outline:none}
+    input:focus, textarea:focus{border-color:var(--brand); box-shadow:0 0 0 6px var(--ring)}
+
+    /* Footer */
+    footer{padding:2rem 0; color:var(--muted); border-top:1px solid rgba(148,163,184,.12)}
+
+    /* ----------- Reveal animations ----------- */
+    .reveal{opacity:0; transform:translateY(16px); filter:blur(6px); transition:opacity .6s ease, transform .6s ease, filter .6s ease}
+    .reveal.show{opacity:1; transform:none; filter:none}
+
+    /* ----------- Mobile ----------- */
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr; gap:1.5rem; padding:3.5rem 0 1.5rem}
+      .contact-grid{grid-template-columns:1fr}
+      .nav-links{display:none}
+      .menu-btn{display:inline-flex}
+    }
+    @media (min-width: 901px){ .menu-btn{display:none} }
+
+    /* Mobile menu */
+    .mobile{position:fixed; inset:0; background:rgba(2,6,23,.7); backdrop-filter:blur(6px); display:none}
+    .mobile.open{display:block}
+    .mobile .sheet{position:absolute; right:0; top:0; bottom:0; width:min(78%, 320px); background:var(--panel); border-left:1px solid rgba(148,163,184,.12); padding:1rem}
+    .mobile a{display:block; padding:.9rem 0; border-bottom:1px dashed rgba(148,163,184,.15)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#"> <span class="dot"></span> <span>yourname.dev</span></a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+        <a class="btn ghost" href="resume.pdf" download>Download CV</a>
+        <div class="toggle" id="themeToggle" title="Toggle theme"></div>
+      </nav>
+      <button class="btn menu-btn" id="openMenu" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <div class="mobile" id="mobileMenu" aria-hidden="true">
+    <div class="sheet">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:.5rem">
+        <strong>Menu</strong>
+        <button class="btn ghost" id="closeMenu">✕</button>
+      </div>
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#skills" onclick="closeMenu()">Skills</a>
+      <a href="#projects" onclick="closeMenu()">Projects</a>
+      <a href="#experience" onclick="closeMenu()">Experience</a>
+      <a href="#contact" onclick="closeMenu()">Contact</a>
+      <a href="resume.pdf" download onclick="closeMenu()">Download CV</a>
+      <a href="#" id="mobileTheme">Toggle Theme</a>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div>
+        <span class="tag reveal">Available for freelance • Based in Anywhere</span>
+        <h1 class="reveal" style="transition-delay:.05s">Hi, I'm <span style="background:linear-gradient(90deg, var(--brand), var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent">Your Name</span> — a software engineer who loves building fast, delightful web apps.</h1>
+        <p class="lead reveal" style="transition-delay:.1s">I specialize in JavaScript/TypeScript, React, Node.js, and cloud. I turn complex ideas into simple, scalable products.</p>
+        <div class="reveal" style="display:flex; gap:.7rem; margin-top:1rem; transition-delay:.15s">
+          <a class="btn" href="#projects">See Projects</a>
+          <a class="btn ghost" href="mailto:hello@yourdomain.com">Email Me</a>
+        </div>
+        <div class="reveal" style="display:flex; gap:.9rem; margin-top:1rem; transition-delay:.2s">
+          <a class="pill" href="https://github.com/yourhandle" target="_blank" rel="noreferrer">GitHub →</a>
+          <a class="pill" href="https://linkedin.com/in/yourhandle" target="_blank" rel="noreferrer">LinkedIn →</a>
+          <a class="pill" href="https://x.com/yourhandle" target="_blank" rel="noreferrer">X/Twitter →</a>
+        </div>
+      </div>
+
+      <div class="code-card reveal" style="transition-delay:.15s">
+        <div class="status-bar"><span class="dotr"></span><span class="doty"></span><span class="dotg"></span></div>
+        <pre><code>// hello-world.ts
+
+const engineer = {
+  name: "Your Name",
+  role: "Software Engineer",
+  stack: ["TypeScript", "React", "Node", "AWS"],
+  currently: "Building impactful products",
+};
+
+export function sayHi() {
+  const msg = `Hey! I'm ${engineer.name}. I build web apps with ${engineer.stack.join(", ")}.`;
+  return msg;
+}
+
+console.log(sayHi());
+</code></pre>
+        <span class="sparkle s1"></span>
+        <span class="sparkle s2"></span>
+        <span class="sparkle s3"></span>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <h2 class="section-title reveal">About</h2>
+      <div class="panel reveal" style="transition-delay:.05s">
+        <p>I'm a product‑oriented software engineer with a focus on delightful UX and solid engineering. I enjoy shipping end‑to‑end features, from polished interfaces to reliable APIs, and I care about performance, accessibility, and clean architecture.</p>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h2 class="section-title reveal">Skills</h2>
+      <div class="skills">
+        <div class="chip reveal"><span>TypeScript</span><span>⚡️</span></div>
+        <div class="chip reveal" style="transition-delay:.02s"><span>React / Next.js</span><span>⚛︎</span></div>
+        <div class="chip reveal" style="transition-delay:.04s"><span>Node.js</span><span>🟢</span></div>
+        <div class="chip reveal" style="transition-delay:.06s"><span>Express / REST</span><span>🛠️</span></div>
+        <div class="chip reveal" style="transition-delay:.08s"><span>PostgreSQL</span><span>🐘</span></div>
+        <div class="chip reveal" style="transition-delay:.1s"><span>MongoDB</span><span>🍃</span></div>
+        <div class="chip reveal" style="transition-delay:.12s"><span>AWS</span><span>☁️</span></div>
+        <div class="chip reveal" style="transition-delay:.14s"><span>Docker</span><span>🐳</span></div>
+        <div class="chip reveal" style="transition-delay:.16s"><span>CI/CD</span><span>🚀</span></div>
+        <div class="chip reveal" style="transition-delay:.18s"><span>Testing</span><span>✅</span></div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <h2 class="section-title reveal">Projects</h2>
+      <div class="projects">
+        <article class="card reveal">
+          <img alt="Project screenshot" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop"/>
+          <div class="card-body">
+            <h3>Realtime Chat App</h3>
+            <p class="muted">WebSockets • React • Node • Redis</p>
+            <div style="display:flex; gap:.4rem; margin-top:.5rem">
+              <span class="pill">Live</span>
+              <a class="pill" href="#">GitHub</a>
+            </div>
+          </div>
+        </article>
+        <article class="card reveal" style="transition-delay:.04s">
+          <img alt="Project screenshot" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop"/>
+          <div class="card-body">
+            <h3>Task Manager API</h3>
+            <p class="muted">Express • PostgreSQL • JWT</p>
+            <div style="display:flex; gap:.4rem; margin-top:.5rem">
+              <span class="pill">Docs</span>
+              <a class="pill" href="#">GitHub</a>
+            </div>
+          </div>
+        </article>
+        <article class="card reveal" style="transition-delay:.08s">
+          <img alt="Project screenshot" src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop"/>
+          <div class="card-body">
+            <h3>Personal Finance Dashboard</h3>
+            <p class="muted">Next.js • Charts • OAuth</p>
+            <div style="display:flex; gap:.4rem; margin-top:.5rem">
+              <span class="pill">Case Study</span>
+              <a class="pill" href="#">GitHub</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <h2 class="section-title reveal">Experience</h2>
+      <div class="panel">
+        <div class="timeline">
+          <div class="t-item reveal">
+            <h3>Senior Software Engineer • Awesome Co</h3>
+            <p class="muted">2023 — Present</p>
+            <p>Led development of a multi‑tenant platform used by 50k+ users. Drove performance improvements (‑35% TTFB) and built CI pipelines.</p>
+          </div>
+          <div class="t-item reveal" style="transition-delay:.04s">
+            <h3>Full‑stack Engineer • Startup XYZ</h3>
+            <p class="muted">2021 — 2023</p>
+            <p>Shipped core features in a React/Node stack, introduced testing culture with 85% coverage and preview deployments.</p>
+          </div>
+          <div class="t-item reveal" style="transition-delay:.08s">
+            <h3>Software Engineer Intern • Example Inc.</h3>
+            <p class="muted">2020 — 2021</p>
+            <p>Built internal tools, automated workflows, and learned to obsess over DX and UX.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+      <h2 class="section-title reveal">Contact</h2>
+      <div class="contact-grid">
+        <div class="panel reveal">
+          <p>Want to collaborate or have a role in mind? Reach out — I usually reply within a day.</p>
+          <p class="muted">Prefer email? Use the form or write to <a href="mailto:hello@yourdomain.com">hello@yourdomain.com</a></p>
+          <div style="display:flex; gap:.6rem; margin-top:.6rem">
+            <a class="btn" href="mailto:hello@yourdomain.com?subject=Project%20Inquiry">Email</a>
+            <a class="btn ghost" href="https://cal.com/yourhandle" target="_blank" rel="noreferrer">Book a Call</a>
+          </div>
+        </div>
+        <div class="panel reveal" style="transition-delay:.05s">
+          <form action="mailto:hello@yourdomain.com" method="post" enctype="text/plain">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button class="btn" type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap">
+      <span>© <span id="year"></span> Your Name</span>
+      <div style="display:flex; gap:.7rem">
+        <a class="pill" href="#">Top ↑</a>
+        <a class="pill" href="sitemap.xml">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear()
+
+    // Theme toggle with localStorage
+    const root = document.documentElement
+    const saved = localStorage.getItem('theme')
+    if(saved){ root.setAttribute('data-theme', saved) }
+
+    const toggleTheme = () => {
+      const current = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light'
+      root.setAttribute('data-theme', current)
+      localStorage.setItem('theme', current)
+    }
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme)
+
+    // Mobile menu
+    const mobileMenu = document.getElementById('mobileMenu')
+    document.getElementById('openMenu').addEventListener('click', ()=> mobileMenu.classList.add('open'))
+    document.getElementById('closeMenu').addEventListener('click', ()=> mobileMenu.classList.remove('open'))
+    window.closeMenu = ()=> mobileMenu.classList.remove('open')
+    document.getElementById('mobileTheme').addEventListener('click', (e)=>{ e.preventDefault(); toggleTheme(); })
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); } })
+    }, {threshold: 0.12})
+    document.querySelectorAll('.reveal').forEach(el=> observer.observe(el))
+
+    // Accessibility: reduce motion respect
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if(mediaQuery.matches){
+      document.querySelectorAll('*').forEach(el=> el.style.transition = 'none')
+    }
+  </script>
+</body>
+</html>
+<!-- End of index.html -->
